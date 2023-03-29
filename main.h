@@ -3,6 +3,11 @@
 
 #include <stdarg.h>
 #include <stddef.h>
+/**
+ * struct print - struct name
+ * @f_type: type of format
+ * @f: funct
+ */
 
 typedef struct print
 {
