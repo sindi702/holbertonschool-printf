@@ -6,24 +6,21 @@
  */
 int _printf(const char *format, ...)
 {
-	int counter;
+	int counter = 0;
 	va_list arg;
 	const char *ptr;
-
-	if (format == NULL)
-		return (-1);
 
 	va_start(arg, format);
 
 	for (ptr = format; *ptr ; ptr++)
 	{
-		if (*ptr == '%' && (*ptr + 1) == '%')
+		if (*ptr == '%' && *(ptr + 1) == '%')
 		{
 			_putchar('%');
 			counter++;
 			continue;
 		}
-		else if (*ptr == '%' && (*ptr + 1) != '%')
+		else if (*ptr == '%' && *(ptr + 1) != '%')
 		{
 			switch(*++ptr)
 			{
@@ -38,7 +35,7 @@ int _printf(const char *format, ...)
 					counter++;
 					break;
 				case '\0':
-					return(-1);
+					return(counter);
 
 				default:
 					_putchar('%');
