@@ -4,10 +4,10 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-typedef struct print_struct
+typedef struct print
 {
 	char *f_type;
-	int (*print)(va_list print);
+	int (*f)(va_list list);
 } print_t;
 int p_char(va_list list);
 int p_str(va_list list);

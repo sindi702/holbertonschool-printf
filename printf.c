@@ -1,48 +1,53 @@
-#include <stdarg.h>
 #include "main.h"
 #include <limits.h>
 #include <stdio.h>
+#include <stdarg.h>
+#include <stddef.h>
 /**
- * print_char - function to print char
- * @cha: argument char to print
- * Return: len of 1
+ * _printf - printing all
+ * @format: format
+ * Return: return the value of printed characters
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int count = 0;
-	char c;
+	int counter;
+	va_list arg;
+	int i, j;
 
-	va_start(args, format);
-
-	while ((c = *format++) != '\0')
+	print_t p_functions[] = {
+		{"c", p_char},
+		{"s", p_str},
+		{NULL, NULL},
+	};
+	if (format == NULL)
+		return (-1);
+	va_start(arg, format);
+	for (i = 0; format != NULL && format[i] != '\0'; i++)
 	{
-		if(c == '%')
+		if (format[i] == '%')
 		{
-			c = *format++;
-		}
-		if (c == 'c')
-		{
-			int arg = va_arg(args, int);
-			putchar(arg);
-			count++;
-		}
-		else if (c == 's')
-		{
-			char *arg = va_arg(args, char *);
-			while (*arg != '\0')
+			for (j = 0; p_functions[j].f_type != NULL; j++)
 			{
-				putchar(*arg++);
-				count++;
+				if (format[i + 1] == p_functions[j].f_type[0])
+				{
+					counter += p_functions[j].f(arg);
+					break;
+				}
 			}
+			if (format[i + 1] == '%')
+				counter += _putchar('%');
+			else if (format[i + 1] == '\0')
+				return (-1);
+			else if (p_functions[j].f_type == NULL && format[i + 1] != '%')
+			{
+				counter += _putchar(format[i]);
+				counter += _putchar(format[i + 1]);
+			}
+			i++;
 		}
-		else if (c == '%')
-		{
-			putchar('%');
-			count++;
-		}
+		else
+			counter += _putchar(format[i]);
 	}
-	va_end(args);
-	return count;
+	va_end(arg);
+	return (counter);
 }
-
