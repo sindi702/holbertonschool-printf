@@ -1,56 +1,48 @@
 #include <stdarg.h>
 #include "main.h"
+#include <limits.h>
+#include <stdio.h>
 /**
- *
- *
+ * print_char - function to print char
+ * @cha: argument char to print
+ * Return: len of 1
  */
 int _printf(const char *format, ...)
 {
-	int counter = 0;
-	va_list arg;
-	const char *ptr;
+	va_list args;
+	int count = 0;
+	char c;
 
-	va_start(arg, format);
+	va_start(args, format);
 
-	for (ptr = format; *ptr ; ptr++)
+	while ((c = *format++) != '\0')
 	{
-		if (*ptr == '%' && *(ptr + 1) == '%')
+		if(c == '%')
 		{
-			_putchar('%');
-			counter++;
-			continue;
+			c = *format++;
 		}
-		else if (*ptr == '%' && *(ptr + 1) != '%')
+		if (c == 'c')
 		{
-			switch(*++ptr)
+			int arg = va_arg(args, int);
+			putchar(arg);
+			count++;
+		}
+		else if (c == 's')
+		{
+			char *arg = va_arg(args, char *);
+			while (*arg != '\0')
 			{
-				case 'c':
-					counter += p_char(arg);
-					break;
-				case 's':
-					counter += p_str(arg);
-					break;
-				case '%':
-					_putchar('%');
-					counter++;
-					break;
-				case '\0':
-					return(counter);
-
-				default:
-					_putchar('%');
-					_putchar(*ptr);
-					counter += 2;
+				putchar(*arg++);
+				count++;
 			}
 		}
-		else
+		else if (c == '%')
 		{
-			if (ptr == NULL)
-				return (0);
-			_putchar(*ptr);
-			counter++;
+			putchar('%');
+			count++;
 		}
 	}
-	va_end(arg);
-	return (counter);
+	va_end(args);
+	return count;
 }
+
