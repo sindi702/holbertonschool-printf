@@ -11,7 +11,6 @@ int _printf(const char *format, ...)
 	int counter;
 	va_list arg;
 	int i, j;
-
 	print_t p_functions[] = {
 		{"c", p_char},
 		{"s", p_str},
@@ -21,10 +20,8 @@ int _printf(const char *format, ...)
 	};
 	if (format == NULL)
 		return (-1);
-
 	va_start(arg, format);
-
-	for (i = 0; format !=NULL && format[i] != '\0'; i++)
+	for (i = 0; format != NULL && format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
@@ -49,7 +46,6 @@ int _printf(const char *format, ...)
 		}
 		else
 			counter += _putchar(format[i]);
-	}
-	va_end(arg);
+	} va_end(arg);
 	return (counter);
 }

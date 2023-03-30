@@ -43,7 +43,7 @@ int p_int_rec(long int n, int count)
 	if (n < 0)
 	{
 		_putchar('-');
-		n = (-1) * n;
+		n = -n;
 	}
 	if (n / 10)
 	{
@@ -60,8 +60,10 @@ int p_int_rec(long int n, int count)
 int p_int(va_list list)
 {
 	long int n;
+
 	n = va_arg(list, long int);
+
 	if (n < 0)
-		return p_int_rec(n, 2);
-	return p_int_rec(n, 1);
+		return (p_int_rec(n, 2));
+	return (p_int_rec(n, 1));
 }
