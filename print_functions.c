@@ -61,8 +61,7 @@ int p_int(va_list list)
 {
 	long int n;
 
-	n = va_arg(list, long int);
-
+	n = va_arg(list, int);
 	if (n < 0)
 		return (p_int_rec(n, 2));
 	return (p_int_rec(n, 1));
