@@ -31,7 +31,7 @@ int p_str(va_list list)
 	return (i);
 }
 /**
- * p_int - print int digits
+ * p_int_rec - recursion function
  * @n:number
  * @count: digits counter
  * Return: return the digits counter
