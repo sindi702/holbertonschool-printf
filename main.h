@@ -2,7 +2,6 @@
 #define MAIN_H
 
 #include <stdarg.h>
-#include <stddef.h>
 /**
  * struct print - struct name
  * @f_type: type of format
@@ -21,4 +20,6 @@ int p_int_rec(long int n, int count);
 int p_float(va_list list);
 int _putchar(char c);
 int _printf(const char *format, ...);
+int p_prc(va_list list);
+
 #endif

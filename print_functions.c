@@ -43,7 +43,7 @@ int p_int_rec(long int n, int count)
 	if (n < 0)
 	{
 		_putchar('-');
-		n = -n;
+		n = (-1) * n;
 	}
 	if (n / 10)
 	{
